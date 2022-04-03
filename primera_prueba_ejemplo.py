@@ -1,10 +1,28 @@
-fallos = 0
-palabra = 'abcedario'
+from itertools import permutations
+import string
 
-def adivinar (letra,fallos,progreso,palabra):
-    
-    resultado = None
-    return resultado 
+#prueba find
+palabra = 'perro'
+letra_ronda = 'r'
+if palabra.find(letra_ronda):  # https://www.delftstack.com/es/howto/python/position-of-character-in-string/
+  posicion = palabra.find(letra_ronda)
+  letra_nv = palabra[posicion]
+  print(posicion) #funciona pero solo muestra la primera
+  print(letra_nv)
+
+  print('===============================================')
+
+  #pruebas set
+  lestras_palabra = set(palabra)
+  letras_abcdario = set(string.ascii_lowercase)
+  letras_adivinar = ''
 
 
-print(adivinar('a',fallos,progreso,palabra))
+  print (lestras_palabra)
+  print(letras_abcdario)
+
+  print('===============================================')
+
+else:
+    print('esta letra no se encuentra')
+

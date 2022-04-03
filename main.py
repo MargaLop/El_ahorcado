@@ -19,14 +19,18 @@ def ahorcado (palabras):
   letras_adivinar = 'x' #investigar que poner
 
   vidas = 6
-  while letras_adivinar > 0 and  vidas > 0:
+  while len(letras_adivinar) > 0 and  vidas > 0:
     print (f'TUS VIDAS SON[{vidas}]')
     letra_ronda = input('Una letra:')
     print(f'LETRAS ESCOGIDAS:{letra_ronda}')
 
 
     if palabra.find(letra_ronda):  # https://www.delftstack.com/es/howto/python/position-of-character-in-string/
-      pass
+      posicion = palabra.find(letra_ronda)
+      letra_nv = palabra[posicion]   #saca la letra
+
+      # letras_adivinar == '_'
+
     else:
       print('Esta letra no se encuentra en la palabra')
       vidas -= 1
