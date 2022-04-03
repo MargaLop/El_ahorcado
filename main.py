@@ -1,5 +1,5 @@
 import random
-# import string
+import string
 from doc_palabras import lista_palabras
 import vidas_representación_grafica
 
@@ -11,11 +11,16 @@ def palabra_azar_ordenador(palabras):
         return random.choice(palabras)  
 
 def ahorcado (palabras):
-      
+  # https://www.delftstack.com/es/howto/python/python-alphabet-list/  - abcdario
+  #   
   palabra = palabra_azar_ordenador(palabras)
+  lestras_palabra = set(palabra)
+  letras_abcdario = set(string.ascii_lowercase)
+  letras_adivinar = 'x' #investigar que poner
 
   vidas = 6
-  while  vidas > 0:
+  while letras_adivinar > 0 and  vidas > 0:
+    print (f'TUS VIDAS SON[{vidas}]')
     letra_ronda = input('Una letra:')
     print(f'LETRAS ESCOGIDAS:{letra_ronda}')
 
@@ -81,6 +86,7 @@ def ahorcado (palabras):
 
 
 
+
 if __name__ == '__main__':
     nombre_usuario = input('¿Cuál es su nombre?:')
     print (f'''
@@ -92,5 +98,4 @@ if __name__ == '__main__':
 ''')
     ahorcado()
    
- #asci dibujos
 
