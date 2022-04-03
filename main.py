@@ -14,27 +14,31 @@ def ahorcado (palabras):
   # https://www.delftstack.com/es/howto/python/python-alphabet-list/  - abcdario
   #   
   palabra = palabra_azar_ordenador(palabras)
-  lestras_palabra = set(palabra)
+  letras_palabra = set(palabra)
   letras_abcdario = set(string.ascii_lowercase)
-  letras_adivinar = 'x' #investigar que poner
+  letras_adivinar = letras_palabra  #investigar que poner
 
-  vidas = 6
+  vidas = 7
   while len(letras_adivinar) > 0 and  vidas > 0:
     print (f'TUS VIDAS SON[{vidas}]')
-    letra_ronda = input('Una letra:')
+    letra_ronda = input('Escoge una letra:')
     print(f'LETRAS ESCOGIDAS:{letra_ronda}')
+    if letra_ronda in  letras_abcdario: #En caso de que el usuario introduzca caracteres distintos al abc
 
+      if palabra.find(letra_ronda):  # https://www.delftstack.com/es/howto/python/position-of-character-in-string/
+        posicion = palabra.find(letra_ronda)
+        letra_nv = palabra[posicion]   #saca la letra
+        letras_adivinar.remove(letras_palabra)
 
-    if palabra.find(letra_ronda):  # https://www.delftstack.com/es/howto/python/position-of-character-in-string/
-      posicion = palabra.find(letra_ronda)
-      letra_nv = palabra[posicion]   #saca la letra
+        # letras_adivinar == '_'
 
-      # letras_adivinar == '_'
+      else:
+        print('Esta letra no se encuentra en la palabra')
+        vidas -= 1
+        print(vidas_representación_grafica.repre_vida[vidas]) #cada vida perdida muestra representación
 
     else:
-      print('Esta letra no se encuentra en la palabra')
-      vidas -= 1
-
+      print('No se encuentra dentro del abcedario.Intentelo de nuevo')
 
 
     if vidas == 0:
