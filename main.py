@@ -10,11 +10,20 @@ import vidas_representación_grafica
 def palabra_azar_ordenador(palabras):
         return random.choice(palabras)  
 
-print (palabra_azar_ordenador(lista_palabras))
-def ahorcado (palabras):
+def progreso_palabra(letras_adivinadas,palabra):
+  resultado = []
+  for letra in palabra:
+    if letra in letras_adivinadas:
+      resultado.append(letra)
+    else:
+      resultado.append('-')
+  
+  return resultado
+
+
+def ahorcado (palabra):
   # https://www.delftstack.com/es/howto/python/python-alphabet-list/  - abcdario
-  #   
-  palabra = palabra_azar_ordenador(palabras)
+
   letras_palabra = set(palabra)
   letras_abcdario = set(string.ascii_lowercase) #el abcedario esta en minusculas
   letras_adivinar = set()   #investigar que poner
@@ -23,9 +32,8 @@ def ahorcado (palabras):
   vidas = 7
   while len(letras_palabra) > 0 and  vidas > 0:
     print (f'TUS VIDAS SON[{vidas}]')
-    
-    grafica_palabra = [letra if letra in letras_adivinar else '-' for letra in palabra]
-    print(grafica_palabra)
+    grafica_palabra = progreso_palabra(letras_adivinar, palabra)
+    # print(palabra)
     print(f"Palabra: {' '.join(grafica_palabra)}")
     letra_ronda = input('Escoge una letra:'). lower() #es necesario que sean minusculas
     print(f'LETRAS ESCOGIDAS:{letra_ronda}')
@@ -33,8 +41,8 @@ def ahorcado (palabras):
     if letra_ronda in  letras_abcdario - letras_adivinar : #En caso de que el usuario introduzca caracteres distintos al abc
 
       letras_adivinar.add(letra_ronda)
-      
-      if palabra.find(letra_ronda):  # https://www.delftstack.com/es/howto/python/position-of-character-in-string/         
+       # https://www.delftstack.com/es/howto/python/position-of-character-in-string/       
+      if palabra.find(letra_ronda) != -1: 
         letras_palabra.remove(letra_ronda)
 
       else:
@@ -55,7 +63,7 @@ def ahorcado (palabras):
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
                                    ______
                                 .-"      "-.
-                               /            \
+                               /            \\
                               |              |
                               |,  .-.  .-.  ,|
                               | )(__/  \__)( |
@@ -77,14 +85,14 @@ def ahorcado (palabras):
              .-.     .-.     .-.     .-.     .-.     .-.     .-.
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
                                   .-=========-.
-                                  \'-=======-'/
+                                  \\'-=======-'/
                                   _|   .=.   |_
                                  ((|  ((1))  |))
                                   \|   /|\   |/
                                    \__ '`' __/
                                      _`) (`_
                                    _/_______\_
-                                  /___________\
+                                  /___________\\
 
                                 ¡¡ENHORABUENA!! 
                           La palabra era {palabra}
