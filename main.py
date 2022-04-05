@@ -10,38 +10,46 @@ import vidas_representación_grafica
 def palabra_azar_ordenador(palabras):
         return random.choice(palabras)  
 
+print (palabra_azar_ordenador(lista_palabras))
 def ahorcado (palabras):
   # https://www.delftstack.com/es/howto/python/python-alphabet-list/  - abcdario
   #   
   palabra = palabra_azar_ordenador(palabras)
   letras_palabra = set(palabra)
-  letras_abcdario = set(string.ascii_lowercase)
-  letras_adivinar = letras_palabra  #investigar que poner
+  letras_abcdario = set(string.ascii_lowercase) #el abcedario esta en minusculas
+  letras_adivinar = set()   #investigar que poner
+  
 
   vidas = 7
-  while len(letras_adivinar) > 0 and  vidas > 0:
+  while len(letras_palabra) > 0 and  vidas > 0:
     print (f'TUS VIDAS SON[{vidas}]')
-    letra_ronda = input('Escoge una letra:')
+    
+    grafica_palabra = [letra if letra in letras_adivinar else '-' for letra in palabra]
+    print(grafica_palabra)
+    print(f"Palabra: {' '.join(grafica_palabra)}")
+    letra_ronda = input('Escoge una letra:'). lower() #es necesario que sean minusculas
     print(f'LETRAS ESCOGIDAS:{letra_ronda}')
-    if letra_ronda in  letras_abcdario: #En caso de que el usuario introduzca caracteres distintos al abc
 
-      if palabra.find(letra_ronda):  # https://www.delftstack.com/es/howto/python/position-of-character-in-string/
-        posicion = palabra.find(letra_ronda)
-        letra_nv = palabra[posicion]   #saca la letra
-        letras_adivinar.remove(letras_palabra)
+    if letra_ronda in  letras_abcdario - letras_adivinar : #En caso de que el usuario introduzca caracteres distintos al abc
 
-        # letras_adivinar == '_'
+      letras_adivinar.add(letra_ronda)
+      
+      if palabra.find(letra_ronda):  # https://www.delftstack.com/es/howto/python/position-of-character-in-string/         
+        letras_palabra.remove(letra_ronda)
 
       else:
         print('Esta letra no se encuentra en la palabra')
         vidas -= 1
         print(vidas_representación_grafica.repre_vida[vidas]) #cada vida perdida muestra representación
 
+    elif letra_ronda in letras_adivinar:
+      print('Esta letra ya fue escogida anteriormente')
+
     else:
       print('No se encuentra dentro del abcedario.Intentelo de nuevo')
 
 
-    if vidas == 0:
+  if vidas == 0:
       print(f'''
              .-.     .-.     .-.     .-.     .-.     .-.     .-.
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
@@ -64,7 +72,7 @@ def ahorcado (palabras):
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
         ''')
     
-    else:
+  else:
       print(f'''
              .-.     .-.     .-.     .-.     .-.     .-.     .-.
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
@@ -84,7 +92,7 @@ def ahorcado (palabras):
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
 
       ''')
-    
+     
 
 
 
@@ -104,6 +112,16 @@ if __name__ == '__main__':
      .-.     .-.     .-.     .-.     .-.     .-.     .-.
 `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
 ''')
-    ahorcado()
+   
+ahorcado(palabra_azar_ordenador(lista_palabras))
    
 
+         
+        
+
+
+
+
+
+
+  
