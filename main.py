@@ -1,7 +1,9 @@
 import random
 import string
+import time
 from doc_palabras import lista_palabras
 import vidas_representación_grafica
+
 
 
 
@@ -30,13 +32,44 @@ def ahorcado (palabra):
   
 
   vidas = 7
+
   while len(letras_palabra) > 0 and  vidas > 0:
-    print (f'TUS VIDAS SON[{vidas}]')
-    grafica_palabra = progreso_palabra(letras_adivinar, palabra)
     # print(palabra)
-    print(f"Palabra: {' '.join(grafica_palabra)}")
-    letra_ronda = input('Escoge una letra:'). lower() #es necesario que sean minusculas
-    print(f'LETRAS ESCOGIDAS:{letra_ronda}')
+
+    grafica_palabra = progreso_palabra(letras_adivinar, palabra)
+
+
+    print(f'''
+    
+         .-.     .-.     .-.     .-.     .-.     .-.     .-.
+    `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
+
+                              __________________________________________
+                             /                                          \\
+                            |    TUS VIDAS SON[{vidas}]                        |
+                            |                                            |
+             . --- .        |   'PALABRA: {' '.join(grafica_palabra)}")    
+           /        \\        ___________________________________________/                          
+          |  O  _  O |      /
+          |  ./   \. |
+          /  `-._.-'  \\
+        .' /         \ `. ''')
+
+    time.sleep(1)
+    letra_ronda = input(''' 
+  
+                                ________________________________________
+                            /                                           \\
+             . --- .        |             ESCOGE UNA LETRA               |   
+           /        \\        ___________________________________________/                          
+          |  O  _  O |      /
+          |  ./   \. |
+          /  `-._.-'  \\
+        .' /         \ `. 
+        
+    TU LETRA:'''). lower() #es necesario que sean minusculas
+
+    print(f'''LETRAS ESCOGIDAS:{letra_ronda} ''')
 
     if letra_ronda in  letras_abcdario - letras_adivinar : #En caso de que el usuario introduzca caracteres distintos al abc
 
@@ -46,36 +79,79 @@ def ahorcado (palabra):
         letras_palabra.remove(letra_ronda)
 
       else:
-        print('Esta letra no se encuentra en la palabra')
         vidas -= 1
-        print(vidas_representación_grafica.repre_vida[vidas]) #cada vida perdida muestra representación
+        print(f'''
+                               _________________________________________________________
+                             /                                                           \\
+                            |    ESTA LETRA NO ESTA EN LA PALABRA. ME VAS A MATAR        |
+                            |                                                            |
+                            |    {vidas_representación_grafica.repre_vida[vidas]}                                                      
+             . --- .        |                                                            |
+           /  \   /  \\        __________________________________________________________/                          
+          |  O  _  O |      /
+          |  ./   \. |
+          /  `-._.-'  \\
+        .' /         \ `. 
+        ''')
+        time.sleep(1)
 
     elif letra_ronda in letras_adivinar:
-      print('Esta letra ya fue escogida anteriormente')
+      print(f'''
+                                _________________________________________
+                             /                                            \\
+                            |   ESTA LETRA YA FUE ESCOGIDA ANTERIORMENTE  |
+                            |   LAS LETRAS QUE YA ESCOGISTE SON:          |
+             . --- .        |   {letras_adivinar}                          
+           /  \   /  \\        ___________________________________________/                          
+          |  O  _  O |      /
+          |  ./   \. |
+          /  `-._.-'  \\
+        .' /         \ `. ''')
+      time.sleep(1)
 
     else:
-      print('No se encuentra dentro del abcedario.Intentelo de nuevo')
+
+      print(f'''
+
+                             _________________________________________
+                           /                                          \\
+           . --- .         |   ESTO NO ES UNA LETRAAAAAA!!!!!!!!       |                
+         /  \   /  \\        __________________________________________/                          
+        |  O  _  O |      /
+        |  ./   \. |
+        /  `-._.-'  \\
+      .' /         \ `. ''')
+    
+      time.sleep(1)
+
 
 
   if vidas == 0:
       print(f'''
              .-.     .-.     .-.     .-.     .-.     .-.     .-.
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
-                                   ______
-                                .-"      "-.
-                               /            \\
-                              |              |
-                              |,  .-.  .-.  ,|
-                              | )(__/  \__)( |
-                              |/     /\     \|
-                              (_     ^^     _)
-                               \__|IIIIII|__/
-                                | \IIIIII/ |
-                                \          /
-                                 `--------`
-                    
-                                 GAME OVER
-                         La palabra era {palabra}
+
+                              ____________________
+                            /                      \\
+                            |    POR TU CULPA,     |
+                            |   LLEGO EL DIA DE MI |
+                            |        MUERTE        |
+                            |    La palabra era    |
+             . --- .        |    {palabra}
+           /        \\        _____________________/                          
+          |  ()  ()  |     /
+          |     ^    |
+          /   |||||  \\       
+        .' /  |||||  \ `.        
+    .-~.-~/           \~-.~-.      
+.-~ ~    |             |    ~ ~-. 
+`- .     |             |     . -'  
+     ~ - |             | - ~     
+         \             /             
+       ___\           /___         
+       ~;_  >- . . -<  _i~                       
+
+                                  
              .-.     .-.     .-.     .-.     .-.     .-.     .-.
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
         ''')
@@ -84,26 +160,23 @@ def ahorcado (palabra):
       print(f'''
              .-.     .-.     .-.     .-.     .-.     .-.     .-.
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
- 
-                             ____________________
+                              ____________________
                             /                      \\
                             |    ¡¡ENHORABUENA!!   |
                             |    La palabra era    |
              . --- .        |    {palabra}
            /        \\        _____________________/                          
-          |  O  _  O |       /
+          |  O  _  O |      /
           |  ./   \. |
-          /  `-._.-'  \\           .-=========-.
-        .' /         \ `.         \\'-=======-'/
+          /  `-._.-'  \\            .-=========-.
+        .' /         \ `.          \\'-=======-'/
     .-~.-~/           \~-.~-.      _|   .=.   |_
 .-~ ~    |             |    ~ ~-. ((|  ((1))  |))
 `- .     |             |     . -'  \|   /|\   |/
      ~ - |             | - ~        \__ '`' __/
          \             /              _`) (`_
        ___\           /___          _/_______\_
-       ~;_  >- . . -<  _i~         /___________\\
-                                  
-                          
+       ~;_  >- . . -<  _i~         /___________\\             
              .-.     .-.     .-.     .-.     .-.     .-.     .-.
         `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
 
@@ -125,7 +198,7 @@ if __name__ == '__main__':
                             /                      \\
              . --- .        | ¿Cuál es su nombre?: |   
            /        \\        _____________________/                          
-          |  O  _  O |       /
+          |  O  _  O |      /
           |  ./   \. |
           /  `-._.-'  \\
         .' /         \ `.
@@ -143,18 +216,16 @@ if __name__ == '__main__':
 
 
     print (f'''
-     .-.     .-.     .-.     .-.     .-.     .-.     .-.
-`._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
-         
+
      .-.     .-.     .-.     .-.     .-.     .-.     .-.
 `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'   `._.'
                               ____________________
                             /                      \\
                             |      Bienvenido      |
-                            |    {nombre_usuario} 
+                            |        {nombre_usuario} 
              . --- .        |      al Ahorcado     |   
            /        \\        _____________________/                          
-          |  O  _  O |       /
+          |  O  _  O |      /
           |  ./   \. |
           /  `-._.-'  \\
         .' /         \ `.
@@ -166,9 +237,8 @@ if __name__ == '__main__':
        ___\           /___
        ~;_  >- . . -<  _i~
        
-
-    NOMBRE:   
 ''')
+time.sleep(1)
    
 ahorcado(palabra_azar_ordenador(lista_palabras))
    
